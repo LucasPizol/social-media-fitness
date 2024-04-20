@@ -1,0 +1,16 @@
+{
+  "name": "social-media-fitness",
+  "version": "1.0.0",
+  "description": "social media fitness app",
+  "main": "index.js",
+  "author": "LucasPizol",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "knex": "^3.1.0",
+    "module-alias": "^2.2.3",
+    "socket.io": "^4.7.5",
+    "typescript": "^5.4.5"
+  }
+}
