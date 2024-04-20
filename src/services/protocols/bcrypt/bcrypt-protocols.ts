@@ -1,6 +1,6 @@
-export interface BcryptHasher {
+export interface BcryptHasherProtocols {
   hash: (value: string) => Promise<string>;
 }
-export interface BcryptCompare {
+export interface BcryptCompareProtocols {
   compare: (value: string, hash: string) => Promise<boolean>;
 }

@@ -1,5 +1,5 @@
 export interface JWTSignProtocols {
-  sign: (payload: string) => string;
+  sign: (payload: any) => string;
 }
 
 export interface JWTVerifyProtocols {

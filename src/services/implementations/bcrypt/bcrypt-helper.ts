@@ -1,9 +1,11 @@
 import {
-  BcryptCompare,
-  BcryptHasher,
+  BcryptCompareProtocols,
+  BcryptHasherProtocols,
 } from "@/services/protocols/bcrypt/bcrypt-protocols";
 import bcrypt from "bcrypt";
-export class BcryptHelper implements BcryptHasher, BcryptCompare {
+export class BcryptHelper
+  implements BcryptHasherProtocols, BcryptCompareProtocols
+{
   async compare(value: string, hash: string): Promise<boolean> {
     return bcrypt.compare(value, hash);
   }
