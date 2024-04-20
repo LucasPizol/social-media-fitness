@@ -6,7 +6,10 @@
   "author": "LucasPizol",
   "license": "MIT",
   "scripts": {
-    "dev": "rimraf ./dist && tsc && nodemon ./dist/main"
+    "build": "rimraf ./dist && tsc",
+    "dev": "yarn build && nodemon ./dist/main",
+    "migrate:make": "knex --env --knexfile ./src/infra/knex/knexfile.ts migrate:make -x ts",
+    "migrate:latest": "knex --env --knexfile ./src/infra/knex/knexfile.ts migrate:latest"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -18,10 +21,15 @@
     "pg": "^8.11.5",
     "rimraf": "^5.0.5",
     "socket.io": "^4.7.5",
+    "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
-    "@types/express": "^4.17.21"
+    "@types/express": "^4.17.21",
+    "@types/pg": "^8.11.5"
+  },
+  "_moduleAliases": {
+    "@": "dist"
   }
 }

@@ -1,4 +1,5 @@
 import express from "express";
+import "module-alias/register";
 import { createServer } from "node:http";
 import { Server } from "socket.io";
 import env from "./config/env";
