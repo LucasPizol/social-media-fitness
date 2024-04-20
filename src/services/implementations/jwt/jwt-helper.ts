@@ -16,7 +16,7 @@ export class JWTHelper implements JWTSignProtocols, JWTVerifyProtocols {
     this.secret = env.jwtSecret;
   }
   sign(payload: any) {
-    return jwt.sign({ payload }, this.secret, {
+    return jwt.sign(payload, this.secret, {
       expiresIn: "1d",
     });
   }
