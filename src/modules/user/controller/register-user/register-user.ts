@@ -1,4 +1,5 @@
 import { RegisterUser } from "@/domain/use-case/user/register-user";
+import { created, serverError } from "@/main/helpers/http";
 import { Controller } from "@/main/protocols/controller";
 import { HttpRequest, HttpResponse } from "@/main/protocols/http";
 
@@ -13,14 +14,9 @@ export class RegisterUserController implements Controller {
     try {
       const user = await this.registerUserUseCase.register(httpRequest.body);
 
-      return {
-        statusCode: 200,
-        body: user,
-      };
+      return created(user);
     } catch (error) {
-      return {
-        statusCode: 500,
-      };
+      return serverError(error);
     }
   }
 }
