@@ -1,6 +1,9 @@
-import { UserModel, UserRegisterAttributes } from "@/domain/model/user";
-import { AddUserRepository } from "@/domain/repository/user/create-user-repository";
-import { AddUser } from "@/domain/use-case/user/add-user";
+import {
+  AddUser,
+  AddUserModel,
+  AddUserRepository,
+  UserModel,
+} from "./add-user-protocols";
 
 export class AddUserUseCase implements AddUser {
   private readonly addUserRepository: AddUserRepository;
@@ -9,7 +12,7 @@ export class AddUserUseCase implements AddUser {
     this.addUserRepository = addUserRepository;
   }
 
-  add(user: UserRegisterAttributes): Promise<UserModel> {
+  add(user: AddUserModel): Promise<UserModel> {
     return this.addUserRepository.add(user);
   }
 }

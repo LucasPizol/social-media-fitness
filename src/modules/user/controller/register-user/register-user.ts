@@ -1,7 +1,11 @@
-import { RegisterUser } from "@/domain/use-case/user/register-user";
-import { created, serverError } from "@/main/helpers/http";
-import { Controller } from "@/main/protocols/controller";
-import { HttpRequest, HttpResponse } from "@/main/protocols/http";
+import {
+  Controller,
+  HttpRequest,
+  HttpResponse,
+  RegisterUser,
+  created,
+  serverError,
+} from "./register-user-protocols";
 
 export class RegisterUserController implements Controller {
   private readonly registerUserUseCase: RegisterUser;

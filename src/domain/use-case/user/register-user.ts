@@ -1,7 +1,5 @@
-import { UserModel, UserRegisterAttributes } from "@/domain/model/user";
+import { AddUserModel, UserModel } from "@/domain/model/user";
 
 export interface RegisterUser {
-  register: (
-    user: UserRegisterAttributes
-  ) => Promise<UserModel & { token: string }>;
+  register: (user: AddUserModel) => Promise<UserModel & { token: string }>;
 }

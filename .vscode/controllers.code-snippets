@@ -1,0 +1,33 @@
+{
+  "[social-media-fitness] Add Controller": {
+    "prefix": "add-controller",
+    "body": [
+      "import { badRequest, created, serverError } from '@/main/helpers/http';",
+      "import { Controller } from '@/main/protocols/controller';",
+      "import { HttpRequest, HttpResponse } from '@/main/protocols/http';",
+      "",
+      "export class ${1:}Controller implements Controller {",
+      "",
+      "  private readonly ${1:}UseCase: ${1:};",
+      "",
+      "  constructor(${1:}UseCase: ${1:}) {",
+      "    this.${1:}UseCase =  ${1:}UseCase;",
+      "  }",
+      "",
+      "  async handle(httpRequest: HttpRequest): Promise<HttpResponse> {",
+      "    try {",
+      "      const data = httpRequest.body;",
+      "      const user = httpRequest.user;",
+      "",
+      "      if (!user) return badRequest(new Error('user'));",
+      "",
+      "      const response = await this.${1:}UseCase.add({...data, userId: user.id});",
+      "      return created(response);",
+      "    } catch (error) {",
+      "      return serverError(error);",
+      "    }",
+      "  }",
+      "}"
+    ]
+  }
+}

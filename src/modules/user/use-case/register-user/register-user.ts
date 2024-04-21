@@ -1,9 +1,12 @@
-import { UserModel, UserRegisterAttributes } from "@/domain/model/user";
-import { AddUser } from "@/domain/use-case/user/add-user";
-import { LoadUserByEmail } from "@/domain/use-case/user/load-user-by-email";
-import { RegisterUser } from "@/domain/use-case/user/register-user";
-import { BcryptHasherProtocols } from "@/services/protocols/bcrypt/bcrypt-protocols";
-import { JWTSignProtocols } from "@/services/protocols/jwt/jwt-protocols";
+import {
+  AddUser,
+  AddUserModel,
+  BcryptHasherProtocols,
+  JWTSignProtocols,
+  LoadUserByEmail,
+  RegisterUser,
+  UserModel,
+} from "./register-user-protocols";
 
 export class RegisterUserUseCase implements RegisterUser {
   private readonly addUserUseCase: AddUser;
@@ -23,9 +26,7 @@ export class RegisterUserUseCase implements RegisterUser {
     this.jwtHelper = jwtHelper;
   }
 
-  async register(
-    user: UserRegisterAttributes
-  ): Promise<UserModel & { token: string }> {
+  async register(user: AddUserModel): Promise<UserModel & { token: string }> {
     const userExists = await this.loadUserByEmailUseCase.loadByEmail(
       user.email
     );

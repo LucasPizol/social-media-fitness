@@ -8,7 +8,7 @@ export interface UserModel {
   updatedAt: Date;
 }
 
-export interface UserRegisterAttributes {
+export interface AddUserModel {
   name: string;
   email: string;
   password: string;

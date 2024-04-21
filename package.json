@@ -9,7 +9,8 @@
     "build": "rimraf ./dist && tsc",
     "dev": "yarn build && nodemon ./dist/main",
     "migrate:make": "knex --env --knexfile ./src/infra/knex/knexfile.ts migrate:make -x ts",
-    "migrate:latest": "knex --env --knexfile ./src/infra/knex/knexfile.ts migrate:latest"
+    "migrate:latest": "knex --env --knexfile ./src/infra/knex/knexfile.ts migrate:latest",
+    "migrate:rollback": "knex --env --knexfile ./src/infra/knex/knexfile.ts migrate:rollback"
   },
   "dependencies": {
     "@types/jsonwebtoken": "^9.0.6",
