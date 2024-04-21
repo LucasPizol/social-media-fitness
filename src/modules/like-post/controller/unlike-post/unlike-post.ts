@@ -4,7 +4,7 @@ import {
   HttpResponse,
   UnlikePost,
   badRequest,
-  created,
+  noContent,
   serverError,
 } from "./unlike-post-protocols";
 
@@ -28,7 +28,7 @@ export class UnlikePostController implements Controller {
         userId: user.id,
       });
 
-      return created(response);
+      return noContent(response);
     } catch (error) {
       return serverError(error);
     }
