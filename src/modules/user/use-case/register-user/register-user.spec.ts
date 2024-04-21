@@ -34,9 +34,14 @@ describe("Register User Use Case", () => {
     id: "any_id",
     name: "any_name",
     email: "any_email",
-    password: "any_password",
     createdAt: fakeDate,
     updatedAt: fakeDate,
+  };
+
+  const fakeAddUser = {
+    name: "any_name",
+    email: "any_email",
+    password: "any_password",
   };
 
   it("should register an user on success", async () => {
@@ -45,18 +50,12 @@ describe("Register User Use Case", () => {
     bcryptHelper.hash.mockResolvedValue("hashed_password");
     jwtHelper.sign.mockReturnValue("any_token");
 
-    const fakeAddUser = {
-      name: "any_name",
-      email: "any_email",
-      password: "any_password",
-    };
-
     const response = await sut.register(fakeAddUser);
+
     expect(response).toEqual({
       id: "any_id",
       name: "any_name",
       email: "any_email",
-      password: "hashed_password",
       createdAt: fakeDate,
       updatedAt: fakeDate,
       token: "any_token",
@@ -74,7 +73,7 @@ describe("Register User Use Case", () => {
     });
 
     try {
-      expect(await sut.register(fakeUser)).toEqual(null);
+      expect(await sut.register(fakeAddUser)).toEqual(null);
     } catch (error: any) {
       expect(error).toBeInstanceOf(Error);
       expect(error.message).toEqual("User already exists");

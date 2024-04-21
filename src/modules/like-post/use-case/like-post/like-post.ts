@@ -1,8 +1,8 @@
-import { LoadLikeByPostAndUser } from "@/domain/use-case/like-post/load-like-by-post-and-user";
 import {
   AddLikePostModel,
   LikePost,
   LikePostRepository,
+  LoadLikeByPostAndUser,
 } from "./like-post-protocols";
 
 export class LikePostUseCase implements LikePost {
