@@ -1,9 +1,4 @@
-import {
-  AddUser,
-  AddUserModel,
-  AddUserRepository,
-  UserModel,
-} from "./add-user-protocols";
+import { AddUser, AddUserModel, AddUserRepository } from "./add-user-protocols";
 
 export class AddUserUseCase implements AddUser {
   private readonly addUserRepository: AddUserRepository;
@@ -12,7 +7,7 @@ export class AddUserUseCase implements AddUser {
     this.addUserRepository = addUserRepository;
   }
 
-  add(user: AddUserModel): Promise<UserModel> {
+  add(user: AddUserModel) {
     return this.addUserRepository.add(user);
   }
 }

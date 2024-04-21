@@ -43,16 +43,6 @@ export class LoginUserUseCase implements LoginUser {
       avatar: user.avatar,
     });
 
-    const returnData = {
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      avatar: user.avatar,
-      createdAt: user.createdAt,
-      updatedAt: user.updatedAt,
-      token,
-    };
-
-    return { ...returnData, token };
+    return { ...user, password: undefined, token };
   }
 }

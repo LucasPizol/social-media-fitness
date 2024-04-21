@@ -40,10 +40,7 @@ describe("Register User Use Case", () => {
   };
 
   it("should register an user on success", async () => {
-    addUserUseCase.add.mockResolvedValue({
-      ...fakeUser,
-      password: "hashed_password",
-    });
+    addUserUseCase.add.mockResolvedValue(fakeUser);
     loadUserByEmailUseCase.loadByEmail.mockResolvedValue(null);
     bcryptHelper.hash.mockResolvedValue("hashed_password");
     jwtHelper.sign.mockReturnValue("any_token");

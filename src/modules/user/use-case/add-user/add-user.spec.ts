@@ -18,7 +18,7 @@ describe("Add Exercise Use Case", () => {
       id: "any_id",
       name: "any_name",
       email: "any_email",
-      password: "any_password",
+      avatar: "any_avatar",
       createdAt: fakeDate,
       updatedAt: fakeDate,
     });
@@ -34,7 +34,7 @@ describe("Add Exercise Use Case", () => {
       id: "any_id",
       name: "any_name",
       email: "any_email",
-      password: "any_password",
+      avatar: "any_avatar",
       createdAt: fakeDate,
       updatedAt: fakeDate,
     });

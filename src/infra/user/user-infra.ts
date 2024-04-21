@@ -4,8 +4,12 @@ import { LoadUserByEmailRepository } from "@/domain/repository/user/load-user-by
 import { knexHelper } from "../knex/knex";
 
 export class UserInfra implements AddUserRepository, LoadUserByEmailRepository {
-  async add(user: AddUserModel): Promise<UserModel> {
-    return (await knexHelper("user").insert(user).returning("*"))[0];
+  async add(user: AddUserModel): Promise<Omit<UserModel, "password">> {
+    return (
+      await knexHelper("user")
+        .insert(user)
+        .returning(["id", "name", "email", "avatar", "createdAt", "updatedAt"])
+    )[0];
   }
 
   async loadByEmail(email: string): Promise<UserModel | null> {

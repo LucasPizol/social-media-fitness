@@ -51,16 +51,6 @@ export class RegisterUserUseCase implements RegisterUser {
       avatar: userCreated.avatar,
     });
 
-    const returnData = {
-      id: userCreated.id,
-      name: userCreated.name,
-      email: userCreated.email,
-      avatar: userCreated.avatar,
-      createdAt: userCreated.createdAt,
-      updatedAt: userCreated.updatedAt,
-      token,
-    };
-
-    return { ...returnData, token };
+    return { ...userCreated, token };
   }
 }
