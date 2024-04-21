@@ -1,10 +1,10 @@
-import { LoginUser } from "@/domain/use-case/user/login-user";
-import { AddUser } from "../add-user/add-user-protocols";
-import { LoadUserByEmail } from "../load-user-by-email/load-user-by-email-protocols";
 import {
+  AddUser,
   BcryptCompareProtocols,
   JWTSignProtocols,
-} from "../register-user/register-user-protocols";
+  LoadUserByEmail,
+  LoginUser,
+} from "./login-user-protocols";
 
 export class LoginUserUseCase implements LoginUser {
   private readonly addUserUseCase: AddUser;
@@ -27,14 +27,14 @@ export class LoginUserUseCase implements LoginUser {
   async login(email: string, password: string) {
     const user = await this.loadUserByEmailUseCase.loadByEmail(email);
 
-    if (!user) throw new Error("User not found");
+    if (!user) throw new Error("Invalid Credentials");
 
     const isValidPassword = await this.bcryptHelper.compare(
       password,
       user.password
     );
 
-    if (!isValidPassword) throw new Error("Invalid password");
+    if (!isValidPassword) throw new Error("Invalid Credentials");
 
     const token = this.jwtHelper.sign({
       id: user.id,
