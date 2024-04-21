@@ -14,3 +14,8 @@ export interface AddUserModel {
   password: string;
   avatar?: string;
 }
+
+export interface LoginUserModel {
+  email: string;
+  password: string;
+}

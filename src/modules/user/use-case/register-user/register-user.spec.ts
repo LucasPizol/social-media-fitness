@@ -55,7 +55,6 @@ describe("Register User Use Case", () => {
     };
 
     const response = await sut.register(fakeAddUser);
-    expect(response.password).not.toEqual(fakeAddUser.password);
     expect(response).toEqual({
       id: "any_id",
       name: "any_name",

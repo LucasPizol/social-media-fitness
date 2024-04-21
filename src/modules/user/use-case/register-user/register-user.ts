@@ -26,7 +26,9 @@ export class RegisterUserUseCase implements RegisterUser {
     this.jwtHelper = jwtHelper;
   }
 
-  async register(user: AddUserModel): Promise<UserModel & { token: string }> {
+  async register(
+    user: AddUserModel
+  ): Promise<Omit<UserModel, "password"> & { token: string }> {
     const userExists = await this.loadUserByEmailUseCase.loadByEmail(
       user.email
     );
@@ -49,6 +51,16 @@ export class RegisterUserUseCase implements RegisterUser {
       avatar: userCreated.avatar,
     });
 
-    return { ...userCreated, token };
+    const returnData = {
+      id: userCreated.id,
+      name: userCreated.name,
+      email: userCreated.email,
+      avatar: userCreated.avatar,
+      createdAt: userCreated.createdAt,
+      updatedAt: userCreated.updatedAt,
+      token,
+    };
+
+    return { ...returnData, token };
   }
 }
