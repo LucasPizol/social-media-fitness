@@ -1,5 +1,5 @@
 import { validateBodyFields } from "@/utils/validate-body-fields";
-import { ExerciseModel } from "../../use-case/add-exercise-protocols";
+import { ExerciseModel } from "../../use-case/add-exercise/add-exercise-protocols";
 import {
   AddExercise,
   Controller,

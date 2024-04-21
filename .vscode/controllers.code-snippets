@@ -29,5 +29,35 @@
       "  }",
       "}"
     ]
+  },
+  "[social-media-fitness] Load Controller": {
+    "prefix": "load-controller",
+    "body": [
+      "import { badRequest, ok, serverError } from '@/main/helpers/http';",
+      "import { Controller } from '@/main/protocols/controller';",
+      "import { HttpRequest, HttpResponse } from '@/main/protocols/http';",
+      "",
+      "export class ${1:}Controller implements Controller {",
+      "",
+      "  private readonly ${1:}UseCase: ${1:};",
+      "",
+      "  constructor(${1:}UseCase: ${1:}) {",
+      "    this.${1:}UseCase =  ${1:}UseCase;",
+      "  }",
+      "",
+      "  async handle(httpRequest: HttpRequest): Promise<HttpResponse> {",
+      "    try {",
+      "      const user = httpRequest.user;",
+      "",
+      "      if (!user) return badRequest(new Error('User not found'));",
+      "",
+      "      const response = await this.${1:}UseCase.load(user.id);",
+      "      return ok(response);",
+      "    } catch (error) {",
+      "      return serverError(error);",
+      "    }",
+      "  }",
+      "}"
+    ]
   }
 }
