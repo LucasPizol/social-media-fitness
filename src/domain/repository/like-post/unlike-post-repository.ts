@@ -1,5 +1,5 @@
-import { LikePostModel } from "@/domain/model/like-post";
+import { AddLikePostModel } from "@/domain/model/like-post";
 
 export interface UnlikePostRepository {
-  unlike: (like: LikePostModel) => Promise<void>;
+  unlike: (like: AddLikePostModel) => Promise<void>;
 }

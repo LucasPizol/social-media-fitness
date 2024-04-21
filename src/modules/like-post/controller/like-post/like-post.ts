@@ -3,11 +3,9 @@ import {
   HttpRequest,
   HttpResponse,
   LikePost,
-  LikePostModel,
   badRequest,
   created,
   serverError,
-  validateBodyFields,
 } from "./like-post-protocols";
 
 export class LikePostController implements Controller {
@@ -25,13 +23,8 @@ export class LikePostController implements Controller {
       if (!user) return badRequest(new Error("user"));
       if (!params?.id) return badRequest(new Error("Param ID not recieved"));
 
-      const data = validateBodyFields<LikePostModel>(
-        [{ key: "postId", type: "string", required: true }],
-        httpRequest.body
-      );
-
       const response = await this.likePostUseCase.like({
-        postId: data.postId,
+        postId: params.id,
         userId: user.id,
       });
 

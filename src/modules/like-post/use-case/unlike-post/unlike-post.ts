@@ -1,5 +1,5 @@
 import {
-  LikePostModel,
+  AddLikePostModel,
   UnlikePost,
   UnlikePostRepository,
 } from "./unlike-post-protocols";
@@ -11,7 +11,7 @@ export class UnlikePostUseCase implements UnlikePost {
     this.unlikePostRepository = unlikePostRepository;
   }
 
-  async unlike({ id, postId, userId }: LikePostModel) {
-    return await this.unlikePostRepository.unlike({ id, postId, userId });
+  async unlike({ postId, userId }: AddLikePostModel) {
+    return await this.unlikePostRepository.unlike({ postId, userId });
   }
 }
