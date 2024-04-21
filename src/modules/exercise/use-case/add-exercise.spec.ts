@@ -2,7 +2,7 @@ import { MockProxy, mock } from "jest-mock-extended";
 import { AddExerciseUseCase } from "./add-exercise";
 import { AddExercise, AddExerciseRepository } from "./add-exercise-protocols";
 
-describe("Add Exercise Controller", () => {
+describe("Add Exercise Use Case", () => {
   let sut: AddExercise;
   let addExerciseRepository: MockProxy<AddExerciseRepository>;
 
