@@ -24,7 +24,7 @@ export class PostInfra
       .update({ isActive: false, disabledAt: new Date() });
   }
 
-  async loadByUserId(userId: string): Promise<PostModel[] | null> {
+  async loadByUserId(userId: string): Promise<PostModelWithLikes[] | null> {
     const posts: (PostModel & {
       likedById: string;
       userName: string;

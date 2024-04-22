@@ -1,5 +1,5 @@
-import { PostModel } from "@/domain/model/post";
+import { PostModelWithLikes } from "@/domain/model/post";
 
 export interface LoadPostByUserId {
-  loadByUserId(userId: string): Promise<PostModel[] | null>;
+  loadByUserId(userId: string): Promise<PostModelWithLikes[] | null>;
 }

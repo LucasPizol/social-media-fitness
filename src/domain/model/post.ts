@@ -6,7 +6,7 @@ export interface PostModel {
   userId: string;
   createdAt: Date;
   updatedAt: Date;
-  disabledAt: Date;
+  disabledAt: Date | null;
   isActive: boolean;
 }
 
