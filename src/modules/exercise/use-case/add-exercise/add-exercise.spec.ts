@@ -14,6 +14,8 @@ describe("Add Exercise Use Case", () => {
     userId: "any_user_id",
     createdAt: fakeDate,
     updatedAt: fakeDate,
+    disabledAt: null,
+    isActive: true,
   };
 
   beforeEach(() => {

@@ -4,6 +4,8 @@ export interface ExerciseModel {
   userId: string;
   createdAt: Date;
   updatedAt: Date;
+  disabledAt: Date | null;
+  isActive: boolean;
 }
 
 export interface AddExerciseModel {

@@ -14,6 +14,10 @@ export class DisableExerciseByIdUseCase implements DisableExerciseById {
     userId: string,
     isActive: boolean
   ): Promise<ExerciseModel | null> {
-    return this.disableExerciseByIdRepository.disableById(id, userId, isActive);
+    return await this.disableExerciseByIdRepository.disableById(
+      id,
+      userId,
+      isActive
+    );
   }
 }

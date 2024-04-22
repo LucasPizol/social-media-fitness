@@ -1,15 +1,12 @@
+import { LoadLikeByPostAndUserRepository } from "@/domain/repository/like-post/load-like-by-post-and-user-repository";
 import { MockProxy, mock } from "jest-mock-extended";
 import { LikePostUseCase } from "./like-post";
-import {
-  LikePost,
-  LikePostRepository,
-  LoadLikeByPostAndUser,
-} from "./like-post-protocols";
+import { LikePost, LikePostRepository } from "./like-post-protocols";
 
 describe("Like Post Use Case", () => {
   let sut: LikePost;
   let likePostRepository: MockProxy<LikePostRepository>;
-  let loadLikeByPostAndUserUseCase: MockProxy<LoadLikeByPostAndUser>;
+  let loadLikeByPostAndUserUseCase: MockProxy<LoadLikeByPostAndUserRepository>;
 
   beforeEach(() => {
     likePostRepository = mock();
