@@ -12,7 +12,7 @@ export async function up(knex: Knex): Promise<void> {
       .onDelete("CASCADE");
     table.datetime("createdAt").notNullable().defaultTo(knex.fn.now());
     table.datetime("updatedAt").notNullable().defaultTo(knex.fn.now());
-    table.datetime("disabledAt").notNullable().defaultTo(knex.fn.now());
+    table.datetime("disabledAt");
     table.boolean("isActive").notNullable().defaultTo(true);
   });
 }

@@ -4,14 +4,24 @@ import {
   PostModelWithLikes,
 } from "@/domain/model/post";
 import { AddPostRepository } from "@/domain/repository/post/add-post-repository";
+import { DisablePostByIdRepository } from "@/domain/repository/post/disable-post-by-id-repository";
 import { LoadPostByUserIdRepository } from "@/domain/repository/post/load-post-by-user-id-repository";
 import { knexHelper } from "../knex/knex";
 
 export class PostInfra
-  implements AddPostRepository, LoadPostByUserIdRepository
+  implements
+    AddPostRepository,
+    LoadPostByUserIdRepository,
+    DisablePostByIdRepository
 {
   async add(post: AddPostModel): Promise<PostModel> {
     return (await knexHelper<PostModel>("post").insert(post).returning("*"))[0];
+  }
+
+  async disableById(id: string, userId: string): Promise<void> {
+    await knexHelper("post")
+      .where({ id, userId })
+      .update({ isActive: false, disabledAt: new Date() });
   }
 
   async loadByUserId(userId: string): Promise<PostModel[] | null> {

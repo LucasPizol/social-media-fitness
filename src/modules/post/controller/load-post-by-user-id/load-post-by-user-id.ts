@@ -3,7 +3,6 @@ import {
   HttpRequest,
   HttpResponse,
   LoadPostByUserId,
-  badRequest,
   ok,
   serverError,
   validateBodyFields,
@@ -18,10 +17,6 @@ export class LoadPostByUserIdController implements Controller {
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      const user = httpRequest.user;
-
-      if (!user) return badRequest(new Error("User not found"));
-
       const data = validateBodyFields<{ id: string }>(
         [
           {
