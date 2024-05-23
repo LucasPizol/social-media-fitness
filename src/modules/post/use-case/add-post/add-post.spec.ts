@@ -20,12 +20,14 @@ describe("Add Post Use Case", () => {
       createdAt: fakeDate,
       updatedAt: fakeDate,
       disabledAt: null,
+      mediaUrl: null,
       isDisabled: true,
     });
 
     const response = await sut.add({
       content: "any_content",
       userId: 0,
+      mediaUrl: null,
     });
 
     expect(addPostRepository.add).toHaveBeenCalledTimes(1);
@@ -37,6 +39,7 @@ describe("Add Post Use Case", () => {
       updatedAt: fakeDate,
       disabledAt: null,
       isDisabled: true,
+      mediaUrl: null,
     });
   });
 });

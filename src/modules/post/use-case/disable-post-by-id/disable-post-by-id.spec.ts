@@ -1,5 +1,5 @@
 import { DisablePostByIdRepository } from "@/domain/repository/post/disable-post-by-id-repository";
-import { DisablePostById } from "@/domain/use-case/post/disable-post-by-id-repository";
+import { DisablePostById } from "@/domain/use-case/post/disable-post-by-id";
 import { MockProxy, mock } from "jest-mock-extended";
 import { DisablePostByIdUseCase } from "./disable-post-by-id";
 

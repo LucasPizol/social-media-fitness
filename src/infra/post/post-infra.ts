@@ -1,14 +1,11 @@
 import { AddPostModel } from "@/domain/model/post";
 import { AddPostRepository } from "@/domain/repository/post/add-post-repository";
 import { DisablePostByIdRepository } from "@/domain/repository/post/disable-post-by-id-repository";
-import { LoadPostByUserIdRepository } from "@/domain/repository/post/load-post-by-user-id-repository";
+import { LoadPostRepository } from "@/domain/repository/post/load-post-repository";
 import { prismaHelper } from "../prisma/prisma-helper";
 
 export class PostInfra
-  implements
-    AddPostRepository,
-    LoadPostByUserIdRepository,
-    DisablePostByIdRepository
+  implements AddPostRepository, DisablePostByIdRepository, LoadPostRepository
 {
   async add(data: AddPostModel) {
     return await prismaHelper.post.create({ data });
@@ -21,9 +18,40 @@ export class PostInfra
     });
   }
 
-  async loadByUserId(userId: number) {
+  async load(userId?: number) {
+    if (userId) {
+      return await prismaHelper.post.findMany({
+        where: { userId },
+        orderBy: {
+          createdAt: "desc",
+        },
+        include: {
+          likes: {
+            select: {
+              likedBy: {
+                select: {
+                  avatar: true,
+                  id: true,
+                  name: true,
+                },
+              },
+            },
+          },
+          user: {
+            select: {
+              avatar: true,
+              id: true,
+              name: true,
+            },
+          },
+        },
+      });
+    }
+
     return await prismaHelper.post.findMany({
-      where: { userId },
+      orderBy: {
+        createdAt: "desc",
+      },
       include: {
         likes: {
           select: {
@@ -34,6 +62,13 @@ export class PostInfra
                 name: true,
               },
             },
+          },
+        },
+        user: {
+          select: {
+            avatar: true,
+            id: true,
+            name: true,
           },
         },
       },

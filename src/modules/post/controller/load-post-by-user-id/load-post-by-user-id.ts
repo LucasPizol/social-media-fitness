@@ -1,35 +1,25 @@
+import { LoadPost } from "@/domain/use-case/post/load-post";
 import {
   Controller,
   HttpRequest,
   HttpResponse,
-  LoadPostByUserId,
   handleErr,
   ok,
-  validateBodyFields,
 } from "./load-post-by-user-id-protocols";
 
-export class LoadPostByUserIdController implements Controller {
-  private readonly loadPostByUserIdUseCase: LoadPostByUserId;
+export class LoadPostController implements Controller {
+  private readonly loadPostByUserIdUseCase: LoadPost;
 
-  constructor(loadPostByUserIdUseCase: LoadPostByUserId) {
+  constructor(loadPostByUserIdUseCase: LoadPost) {
     this.loadPostByUserIdUseCase = loadPostByUserIdUseCase;
   }
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      const data = validateBodyFields<{ id: string }>(
-        [
-          {
-            key: "id",
-            type: "string",
-            required: true,
-          },
-        ],
-        httpRequest.params
-      );
+      const id = httpRequest.query;
 
-      const response = await this.loadPostByUserIdUseCase.loadByUserId(
-        Number(data.id)
+      const response = await this.loadPostByUserIdUseCase.load(
+        id ? Number(id) : undefined
       );
 
       return ok(response);

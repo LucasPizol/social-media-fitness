@@ -1,20 +1,18 @@
+import { LoadPostRepository } from "@/domain/repository/post/load-post-repository";
+import { LoadPost } from "@/domain/use-case/post/load-post";
 import { MockProxy, mock } from "jest-mock-extended";
-import { LoadPostByUserIdUseCase } from "./load-post-by-user-id";
-import {
-  LoadPostByUserId,
-  LoadPostByUserIdRepository,
-} from "./load-post-by-user-id-protocols";
+import { LoadPostUseCase } from "./load-post";
 
 describe("Load Post By User Id Use Case", () => {
-  let sut: LoadPostByUserId;
-  let loadPostByUserIdRepository: MockProxy<LoadPostByUserIdRepository>;
+  let sut: LoadPost;
+  let loadPostByUserIdRepository: MockProxy<LoadPostRepository>;
 
   const fakeDate = new Date();
 
   beforeEach(() => {
     loadPostByUserIdRepository = mock();
 
-    sut = new LoadPostByUserIdUseCase(loadPostByUserIdRepository);
+    sut = new LoadPostUseCase(loadPostByUserIdRepository);
   });
 
   it("should be able to load post by user id", async () => {
@@ -31,9 +29,9 @@ describe("Load Post By User Id Use Case", () => {
     //   },
     // ]);
 
-    const response = await sut.loadByUserId(1);
+    const response = await sut.load(1);
 
-    expect(loadPostByUserIdRepository.loadByUserId).toHaveBeenCalledTimes(1);
+    expect(loadPostByUserIdRepository.load).toHaveBeenCalledTimes(1);
     expect(response).toEqual([
       {
         id: 0,
@@ -49,9 +47,9 @@ describe("Load Post By User Id Use Case", () => {
   });
 
   it("should return null if user was not found", async () => {
-    loadPostByUserIdRepository.loadByUserId.mockResolvedValue([]);
+    loadPostByUserIdRepository.load.mockResolvedValue([]);
 
-    const response = await sut.loadByUserId(1);
+    const response = await sut.load(1);
 
     expect(response.length).toBe(0);
   });

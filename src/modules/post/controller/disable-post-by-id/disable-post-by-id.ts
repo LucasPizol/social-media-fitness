@@ -1,4 +1,4 @@
-import { DisablePostById } from "@/domain/use-case/post/disable-post-by-id-repository";
+import { DisablePostById } from "@/domain/use-case/post/disable-post-by-id";
 import { created, handleErr } from "@/main/helpers/http";
 import { Controller } from "@/protocols/controller";
 import { BadRequestError } from "@/protocols/errors/bad-request";
