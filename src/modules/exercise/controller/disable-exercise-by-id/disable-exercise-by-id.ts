@@ -18,15 +18,15 @@ export class DisableExerciseByIdController implements Controller {
 
       if (!user) return badRequest(new Error("user"));
       if (!params?.id) return badRequest(new Error("Param ID not recieved"));
-      const data = validateBodyFields<{ isActive: boolean }>(
-        [{ key: "isActive", type: "boolean", required: true }],
+      const data = validateBodyFields<{ isDisabled: boolean }>(
+        [{ key: "isDisabled", type: "boolean", required: true }],
         httpRequest.body
       );
 
       const response = await this.disableExerciseByIdUseCase.disableById(
         params.id,
         user.id,
-        data.isActive
+        data.isDisabled
       );
       return created(response);
     } catch (error) {

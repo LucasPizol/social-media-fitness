@@ -12,8 +12,8 @@ export class UpdateExerciseByIdUseCase implements UpdateExerciseById {
   }
 
   async updateById(
-    id: string,
-    userId: string,
+    id: number,
+    userId: number,
     data: Partial<ExerciseModel>
   ): Promise<ExerciseModel | null> {
     return await this.updateExerciseByIdRepository.updateById(id, userId, data);

@@ -16,49 +16,69 @@ describe("Disable Exercise By Id Use Case", () => {
 
   it("should be able to disable exercise by id", async () => {
     disableExerciseByIdRepository.disableById.mockResolvedValue({
-      id: "any_id",
-      name: "any_name",
+      id: 0,
+      name: "any_other_name",
       createdAt: fakeDate,
+      repeats: 0,
+      rest_time: 0,
+      rest_type: "any_rest_type",
+      series: 0,
+      weight: 0,
       updatedAt: fakeDate,
       disabledAt: fakeDate,
-      isActive: true,
-      userId: "any_user_id",
+      isDisabled: true,
+      userId: 0,
     });
 
-    const response = await sut.disableById("any_id", "any_user_id", true);
+    const response = await sut.disableById(0, 0, true);
 
     expect(response).toEqual({
-      id: "any_id",
-      name: "any_name",
+      id: 0,
+      name: "any_other_name",
       createdAt: fakeDate,
       updatedAt: fakeDate,
       disabledAt: fakeDate,
-      isActive: true,
-      userId: "any_user_id",
+      isDisabled: true,
+      userId: 0,
+      repeats: 0,
+      rest_time: 0,
+      rest_type: "any_rest_type",
+      series: 0,
+      weight: 0,
     });
   });
 
   it("should be able to enable exercise by id", async () => {
     disableExerciseByIdRepository.disableById.mockResolvedValue({
-      id: "any_id",
-      name: "any_name",
+      id: 0,
+      name: "any_other_name",
       createdAt: fakeDate,
+      repeats: 0,
+      rest_time: 0,
+      rest_type: "any_rest_type",
+      series: 0,
+      weight: 0,
       updatedAt: fakeDate,
       disabledAt: null,
-      isActive: false,
-      userId: "any_user_id",
+      isDisabled: true,
+      userId: 0,
     });
 
-    const response = await sut.disableById("any_id", "any_user_id", false);
+    const response = await sut.disableById(0, 0, false);
 
     expect(response).toEqual({
-      id: "any_id",
-      name: "any_name",
+      id: 0,
+      name: "any_other_name",
       createdAt: fakeDate,
       updatedAt: fakeDate,
       disabledAt: null,
-      isActive: false,
-      userId: "any_user_id",
+      isDisabled: true,
+      userId: 0,
+      repeats: 0,
+      rest_time: 0,
+      rest_type: "any_rest_type",
+      series: 0,
+      weight: 0,
     });
   });
 });

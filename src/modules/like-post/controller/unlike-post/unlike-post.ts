@@ -1,17 +1,17 @@
+import { BadRequestError } from "@/protocols/errors/bad-request";
 import {
   Controller,
+  DisableLike,
   HttpRequest,
   HttpResponse,
-  UnlikePost,
-  badRequest,
   handleErr,
   noContent,
 } from "./unlike-post-protocols";
 
 export class UnlikePostController implements Controller {
-  private readonly unlikePostUseCase: UnlikePost;
+  private readonly unlikePostUseCase: DisableLike;
 
-  constructor(unlikePostUseCase: UnlikePost) {
+  constructor(unlikePostUseCase: DisableLike) {
     this.unlikePostUseCase = unlikePostUseCase;
   }
 
@@ -20,12 +20,12 @@ export class UnlikePostController implements Controller {
       const user = httpRequest.user;
       const params = httpRequest.params;
 
-      if (!user) return badRequest(new Error("user"));
-      if (!params?.id) return badRequest(new Error("Param ID not recieved"));
+      if (!user) throw new BadRequestError("user");
+      if (!params?.id) throw new BadRequestError("Param 'id' not recieved");
 
       const response = await this.unlikePostUseCase.unlike({
         postId: params.id,
-        userId: user.id,
+        likedById: user.id,
       });
 
       return noContent(response);

@@ -17,11 +17,11 @@ export class DisablePostByIdController implements Controller {
 
       if (!user) return badRequest(new Error("user"));
 
-      const data = validateBodyFields<{ id: string }>(
+      const data = validateBodyFields<{ id: number }>(
         [
           {
             key: "id",
-            type: "string",
+            type: "number",
             required: true,
           },
         ],

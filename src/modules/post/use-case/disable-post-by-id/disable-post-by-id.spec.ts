@@ -14,7 +14,7 @@ describe("Disable Post By Id", () => {
 
   it("should be able to disable post by id", async () => {
     disablePostByIdRepository.disableById.mockResolvedValue();
-    const response = await sut.disableById("any_id", "any_user_id");
+    const response = await sut.disableById(1, 2);
     expect(response).toBeUndefined();
   });
 });

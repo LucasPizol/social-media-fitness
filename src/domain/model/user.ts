@@ -1,21 +1,13 @@
 export interface UserModel {
-  id: string;
+  id: number;
   name: string;
   email: string;
   password: string;
-  avatar?: string;
+  avatar: string | null;
   createdAt: Date;
   updatedAt: Date;
 }
 
-export interface AddUserModel {
-  name: string;
-  email: string;
-  password: string;
-  avatar?: string;
-}
+export type AddUserModel = Omit<UserModel, "id" | "createdAt" | "updatedAt">;
 
-export interface LoginUserModel {
-  email: string;
-  password: string;
-}
+export type LoginUserModel = Pick<UserModel, "email" | "password">;

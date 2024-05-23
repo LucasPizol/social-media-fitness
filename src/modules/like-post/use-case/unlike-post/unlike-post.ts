@@ -1,17 +1,17 @@
 import {
-  AddLikePostModel,
-  UnlikePost,
-  UnlikePostRepository,
+  AddLikeModel,
+  DisableLike,
+  DisableLikeRepository,
 } from "./unlike-post-protocols";
 
-export class UnlikePostUseCase implements UnlikePost {
-  private readonly unlikePostRepository: UnlikePostRepository;
+export class UnlikePostUseCase implements DisableLike {
+  private readonly unlikePostRepository: DisableLikeRepository;
 
-  constructor(unlikePostRepository: UnlikePostRepository) {
+  constructor(unlikePostRepository: DisableLikeRepository) {
     this.unlikePostRepository = unlikePostRepository;
   }
 
-  async unlike({ postId, userId }: AddLikePostModel) {
-    return await this.unlikePostRepository.unlike({ postId, userId });
+  async unlike(data: AddLikeModel) {
+    return await this.unlikePostRepository.unlike(data);
   }
 }

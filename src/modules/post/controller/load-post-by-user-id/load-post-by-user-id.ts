@@ -28,7 +28,9 @@ export class LoadPostByUserIdController implements Controller {
         httpRequest.params
       );
 
-      const response = await this.loadPostByUserIdUseCase.loadByUserId(data.id);
+      const response = await this.loadPostByUserIdUseCase.loadByUserId(
+        Number(data.id)
+      );
 
       return ok(response);
     } catch (error) {

@@ -1,3 +1,3 @@
 export interface DisablePostByIdRepository {
-  disableById(id: string, userId: string): Promise<void>;
+  disableById(id: number, userId: number): Promise<void>;
 }

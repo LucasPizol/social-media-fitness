@@ -1,4 +1,4 @@
-import { LikePostInfra } from "@/infra/like-post/like-post-infra";
+import { LikePostInfra } from "@/infra/like/like-infra";
 import { UnlikePostController } from "@/modules/like-post/controller/unlike-post/unlike-post";
 import { UnlikePostUseCase } from "@/modules/like-post/use-case/unlike-post/unlike-post";
 import { Controller } from "@/protocols/controller";

@@ -7,13 +7,14 @@
   "license": "MIT",
   "scripts": {
     "build": "rimraf ./dist && tsc",
-    "dev": "yarn build && nodemon ./dist/main",
+    "dev": "nodemon",
     "migrate:make": "knex --env --knexfile ./src/infra/knex/knexfile.ts migrate:make -x ts",
     "migrate:latest": "knex --env --knexfile ./src/infra/knex/knexfile.ts migrate:latest",
     "migrate:rollback": "knex --env --knexfile ./src/infra/knex/knexfile.ts migrate:rollback",
     "test": "jest"
   },
   "dependencies": {
+    "@prisma/client": "^5.14.0",
     "@swc/core": "^1.4.16",
     "@swc/jest": "^0.2.36",
     "@types/jsonwebtoken": "^9.0.6",
@@ -28,6 +29,7 @@
     "module-alias": "^2.2.3",
     "nodemon": "^3.1.0",
     "pg": "^8.11.5",
+    "prisma": "^5.14.0",
     "rimraf": "^5.0.5",
     "socket.io": "^4.7.5",
     "ts-jest": "^29.1.2",

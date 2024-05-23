@@ -31,17 +31,19 @@ describe("Register User Use Case", () => {
   const fakeDate = new Date();
 
   const fakeUser = {
-    id: "any_id",
+    id: 0,
     name: "any_name",
     email: "any_email",
     createdAt: fakeDate,
     updatedAt: fakeDate,
+    avatar: "any_avatar",
   };
 
   const fakeAddUser = {
     name: "any_name",
     email: "any_email",
     password: "any_password",
+    avatar: "any_avatar",
   };
 
   it("should register an user on success", async () => {
@@ -53,7 +55,7 @@ describe("Register User Use Case", () => {
     const response = await sut.register(fakeAddUser);
 
     expect(response).toEqual({
-      id: "any_id",
+      id: 0,
       name: "any_name",
       email: "any_email",
       createdAt: fakeDate,
@@ -64,12 +66,13 @@ describe("Register User Use Case", () => {
 
   it("should not register a user because it already exists", async () => {
     loadUserByEmailUseCase.loadByEmail.mockResolvedValue({
-      id: "any_id",
+      id: 0,
       name: "any_name",
       email: "any_email",
       password: "any_password",
       createdAt: fakeDate,
       updatedAt: fakeDate,
+      avatar: "any_avatar",
     });
 
     try {

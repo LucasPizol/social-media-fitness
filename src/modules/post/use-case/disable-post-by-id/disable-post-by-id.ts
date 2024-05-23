@@ -8,7 +8,7 @@ export class DisablePostByIdUseCase implements DisablePostById {
     this.disablePostByIdRepository = disablePostByIdRepository;
   }
 
-  async disableById(id: string, userId: string): Promise<void> {
+  async disableById(id: number, userId: number): Promise<void> {
     await this.disablePostByIdRepository.disableById(id, userId);
   }
 }

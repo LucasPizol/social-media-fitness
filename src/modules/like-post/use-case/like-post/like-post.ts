@@ -1,30 +1,17 @@
 import {
-  AddLikePostModel,
-  LikePost,
-  LikePostRepository,
-  LoadLikeByPostAndUser,
+  AddLike,
+  AddLikeModel,
+  AddLikeRepository,
 } from "./like-post-protocols";
 
-export class LikePostUseCase implements LikePost {
-  private readonly likePostRepository: LikePostRepository;
-  private readonly loadLikeByPostAndUser: LoadLikeByPostAndUser;
+export class LikePostUseCase implements AddLike {
+  private readonly likePostRepository: AddLikeRepository;
 
-  constructor(
-    likePostRepository: LikePostRepository,
-    loadLikeByPostAndUser: LoadLikeByPostAndUser
-  ) {
+  constructor(likePostRepository: AddLikeRepository) {
     this.likePostRepository = likePostRepository;
-    this.loadLikeByPostAndUser = loadLikeByPostAndUser;
   }
 
-  async like({ postId, userId }: AddLikePostModel) {
-    const alreadyExistsLike = await this.loadLikeByPostAndUser.load(
-      postId,
-      userId
-    );
-
-    if (alreadyExistsLike) return alreadyExistsLike;
-
-    return await this.likePostRepository.like({ postId, userId });
+  async like(data: AddLikeModel) {
+    return await this.likePostRepository.like(data);
   }
 }

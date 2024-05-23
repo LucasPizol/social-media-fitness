@@ -17,22 +17,24 @@ describe("Load User By Email Use Case", () => {
 
   it("should return an user on success", async () => {
     loadUserByEmailRepository.loadByEmail.mockResolvedValue({
-      id: "any_id",
+      id: 0,
       name: "any_name",
       email: "any_email",
       password: "any_password",
       createdAt: fakeDate,
       updatedAt: fakeDate,
+      avatar: "any_avatar",
     });
 
     const user = await sut.loadByEmail("any_email");
 
     expect(loadUserByEmailRepository.loadByEmail).toHaveBeenCalledTimes(1);
     expect(user).toEqual({
-      id: "any_id",
+      id: 0,
       name: "any_name",
       email: "any_email",
       password: "any_password",
+      avatar: "any_avatar",
       createdAt: fakeDate,
       updatedAt: fakeDate,
     });

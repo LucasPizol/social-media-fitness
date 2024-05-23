@@ -1,7 +1,9 @@
-import { LoadUserByIdRepository } from "@/domain/repository/user/load-user-by-id-repository";
-import { LoadUserById } from "@/domain/use-case/user/load-user-by-id";
 import { MockProxy, mock } from "jest-mock-extended";
 import { LoadUserByIdUseCase } from "./load-user-by-id";
+import {
+  LoadUserById,
+  LoadUserByIdRepository,
+} from "./load-user-by-id-protocols";
 
 describe("Load User By Id Use Case", () => {
   let sut: LoadUserById;
@@ -14,16 +16,16 @@ describe("Load User By Id Use Case", () => {
 
   it("should be able to load user by id", async () => {
     loadUserByIdRepository.loadById.mockResolvedValue({
-      id: "any_id",
+      id: 0,
       name: "any_name",
       avatar: "any_avatar",
     });
 
-    const response = await sut.loadById("any_id");
+    const response = await sut.loadById(0);
 
     expect(loadUserByIdRepository.loadById).toHaveBeenCalledTimes(1);
     expect(response).toEqual({
-      id: "any_id",
+      id: 0,
       name: "any_name",
       avatar: "any_avatar",
     });

@@ -1,11 +1,11 @@
-import { LoadLikeByPostAndUserRepository } from "@/domain/repository/like-post/load-like-by-post-and-user-repository";
+import { LoadLikeByPostRepository } from "@/domain/repository/like/load-like-by-post-repository";
 import { MockProxy, mock } from "jest-mock-extended";
-import { LoadLikeByPostAndUser } from "../like-post/like-post-protocols";
+import { LoadLikeByPost } from "../like-post/like-post-protocols";
 import { LoadLikeByPostAndUserUseCase } from "./load-like-by-post-and-user";
 
 describe("Load Like By Post And User Use Case", () => {
-  let sut: LoadLikeByPostAndUser;
-  let loadLikeByPostAndUserRepository: MockProxy<LoadLikeByPostAndUserRepository>;
+  let sut: LoadLikeByPost;
+  let loadLikeByPostAndUserRepository: MockProxy<LoadLikeByPostRepository>;
 
   beforeEach(() => {
     loadLikeByPostAndUserRepository = mock();
@@ -14,26 +14,22 @@ describe("Load Like By Post And User Use Case", () => {
   });
 
   it("should be able to load like by post and user", async () => {
-    loadLikeByPostAndUserRepository.load.mockResolvedValue({
-      id: "any_id",
-      postId: "any_post_id",
-      userId: "any_post_id",
-    });
+    loadLikeByPostAndUserRepository.loadLikeByPost.mockResolvedValue([
+      {
+        id: 0,
+        postId: 0,
+        likedById: 0,
+      },
+    ]);
 
-    const response = await sut.load("any_post_id", "any_user_id");
+    const response = await sut.loadLikeByPost(0);
 
-    expect(response).toEqual({
-      id: "any_id",
-      postId: "any_post_id",
-      userId: "any_post_id",
-    });
-  });
-
-  it("should return null if there is no like", async () => {
-    loadLikeByPostAndUserRepository.load.mockResolvedValue(null);
-
-    const response = await sut.load("any_post_id", "any_user_id");
-
-    expect(response).toBeNull();
+    expect(response).toEqual([
+      {
+        id: 0,
+        postId: 0,
+        likedById: 0,
+      },
+    ]);
   });
 });

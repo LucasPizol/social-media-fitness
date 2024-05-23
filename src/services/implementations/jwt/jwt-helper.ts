@@ -24,7 +24,7 @@ export class JWTHelper implements JWTSignProtocols, JWTVerifyProtocols {
     return new Promise<T | null>((res, rej) => {
       jwt.verify(token, this.secret, (err, decoded) => {
         if (err || !decoded) {
-          return rej(null);
+          return res(null);
         }
 
         return res(decoded as T);

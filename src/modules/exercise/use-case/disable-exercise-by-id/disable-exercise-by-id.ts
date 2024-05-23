@@ -10,14 +10,14 @@ export class DisableExerciseByIdUseCase implements DisableExerciseById {
   }
 
   async disableById(
-    id: string,
-    userId: string,
-    isActive: boolean
+    id: number,
+    userId: number,
+    isDisabled: boolean
   ): Promise<ExerciseModel | null> {
     return await this.disableExerciseByIdRepository.disableById(
       id,
       userId,
-      isActive
+      isDisabled
     );
   }
 }

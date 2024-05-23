@@ -1,10 +1,10 @@
 import { MockProxy, mock } from "jest-mock-extended";
 import { UnlikePostUseCase } from "./unlike-post";
-import { UnlikePost, UnlikePostRepository } from "./unlike-post-protocols";
+import { DisableLike, DisableLikeRepository } from "./unlike-post-protocols";
 
 describe("Unlike Post Use Case", () => {
-  let sut: UnlikePost;
-  let unlikePostRepository: MockProxy<UnlikePostRepository>;
+  let sut: DisableLike;
+  let unlikePostRepository: MockProxy<DisableLikeRepository>;
 
   beforeEach(() => {
     unlikePostRepository = mock();
@@ -14,8 +14,8 @@ describe("Unlike Post Use Case", () => {
 
   it("should be able to unlike a post", async () => {
     const data = {
-      postId: "post-id",
-      userId: "user-id",
+      postId: 0,
+      likedById: 0,
     };
 
     unlikePostRepository.unlike.mockResolvedValue();

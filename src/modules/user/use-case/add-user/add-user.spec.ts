@@ -15,7 +15,7 @@ describe("Add Exercise Use Case", () => {
 
   it("should return an user on success", async () => {
     addUserRepository.add.mockResolvedValue({
-      id: "any_id",
+      id: 0,
       name: "any_name",
       email: "any_email",
       avatar: "any_avatar",
@@ -27,11 +27,12 @@ describe("Add Exercise Use Case", () => {
       name: "any_name",
       email: "any_email",
       password: "any_password",
+      avatar: "any_avatar",
     });
 
     expect(addUserRepository.add).toHaveBeenCalledTimes(1);
     expect(response).toEqual({
-      id: "any_id",
+      id: 0,
       name: "any_name",
       email: "any_email",
       avatar: "any_avatar",

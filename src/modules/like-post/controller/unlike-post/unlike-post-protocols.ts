@@ -1,5 +1,5 @@
-export * from "@/domain/model/like-post";
-export * from "@/domain/use-case/like-post/unlike-post";
+export * from "@/domain/model/like";
+export * from "@/domain/use-case/like/disable-like";
 export * from "@/main/helpers/http";
 export * from "@/protocols/controller";
 export * from "@/protocols/http";

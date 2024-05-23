@@ -11,7 +11,7 @@ export class LoadExerciseUseCase implements LoadExercise {
     this.loadExerciseRepository = loadExerciseRepository;
   }
 
-  async load(userId: string): Promise<ExerciseModel[] | null> {
+  async load(userId: number): Promise<ExerciseModel[] | null> {
     return await this.loadExerciseRepository.load(userId);
   }
 }

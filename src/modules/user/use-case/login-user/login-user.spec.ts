@@ -34,18 +34,19 @@ describe("Lohin User Use Case", () => {
 
   it("should not login a user because it already exists", async () => {
     loadUserByEmailUseCase.loadByEmail.mockResolvedValue({
-      id: "any_id",
+      id: 0,
       name: "any_name",
       email: "any_email",
       password: "any_password",
       createdAt: fakeDate,
       updatedAt: fakeDate,
+      avatar: "any_avatar",
     });
     bcryptHelper.compare.mockResolvedValue(true);
     jwtHelper.sign.mockReturnValue("any_token");
 
     expect(await sut.login("any_name", "any_password")).toEqual({
-      id: "any_id",
+      id: 0,
       name: "any_name",
       email: "any_email",
       avatar: undefined,
@@ -68,12 +69,13 @@ describe("Lohin User Use Case", () => {
 
   it("should not login a user because it the password is incorrect", async () => {
     loadUserByEmailUseCase.loadByEmail.mockResolvedValue({
-      id: "any_id",
+      id: 0,
       name: "any_name",
       email: "any_email",
       password: "any_other_password",
       createdAt: fakeDate,
       updatedAt: fakeDate,
+      avatar: "any_avatar",
     });
     bcryptHelper.compare.mockResolvedValue(false);
 

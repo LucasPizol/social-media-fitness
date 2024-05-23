@@ -13,7 +13,7 @@ export class LoadUserByIdController implements Controller {
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      const data = validateBodyFields<{ id: string }>(
+      const data = validateBodyFields<{ id: number }>(
         [
           {
             key: "id",

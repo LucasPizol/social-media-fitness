@@ -1,17 +1,14 @@
-import { LoadLikeByPostAndUserRepository } from "@/domain/repository/like-post/load-like-by-post-and-user-repository";
-import { LoadLikeByPostAndUser } from "@/domain/use-case/like-post/load-like-by-post-and-user";
-import { LikePostModel } from "../like-post/like-post-protocols";
+import { LoadLikeByPostRepository } from "@/domain/repository/like/load-like-by-post-repository";
+import { LoadLikeByPost } from "@/domain/use-case/like/load-like-by-post";
 
-export class LoadLikeByPostAndUserUseCase implements LoadLikeByPostAndUser {
-  private readonly loadLikeByPostAndUserRepository: LoadLikeByPostAndUserRepository;
+export class LoadLikeByPostAndUserUseCase implements LoadLikeByPost {
+  private readonly loadLikeByPostAndUserRepository: LoadLikeByPostRepository;
 
-  constructor(
-    loadLikeByPostAndUserRepository: LoadLikeByPostAndUserRepository
-  ) {
+  constructor(loadLikeByPostAndUserRepository: LoadLikeByPostRepository) {
     this.loadLikeByPostAndUserRepository = loadLikeByPostAndUserRepository;
   }
 
-  async load(postId: string, userId: string): Promise<LikePostModel | null> {
-    return await this.loadLikeByPostAndUserRepository.load(postId, userId);
+  async loadLikeByPost(postId: number) {
+    return await this.loadLikeByPostAndUserRepository.loadLikeByPost(postId);
   }
 }

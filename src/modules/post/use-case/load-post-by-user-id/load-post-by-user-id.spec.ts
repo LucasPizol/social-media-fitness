@@ -18,41 +18,41 @@ describe("Load Post By User Id Use Case", () => {
   });
 
   it("should be able to load post by user id", async () => {
-    loadPostByUserIdRepository.loadByUserId.mockResolvedValue([
-      {
-        id: "any_id",
-        content: "any_content",
-        userId: "any_user_id",
-        createdAt: fakeDate,
-        updatedAt: fakeDate,
-        disabledAt: null,
-        isActive: true,
-        likes: [],
-      },
-    ]);
+    // loadPostByUserIdRepository.loadByUserId.mockResolvedValue([
+    //   {
+    //     id: 0,
+    //     content: "any_content",
+    //     userId: 0,
+    //     createdAt: fakeDate,
+    //     updatedAt: fakeDate,
+    //     disabledAt: null,
+    //     isActive: true,
+    //     likes: [],
+    //   },
+    // ]);
 
-    const response = await sut.loadByUserId("any_user_id");
+    const response = await sut.loadByUserId(1);
 
     expect(loadPostByUserIdRepository.loadByUserId).toHaveBeenCalledTimes(1);
     expect(response).toEqual([
       {
-        id: "any_id",
+        id: 0,
         content: "any_content",
-        userId: "any_user_id",
+        userId: 0,
         createdAt: fakeDate,
         updatedAt: fakeDate,
         disabledAt: null,
-        isActive: true,
+        isDisabled: true,
         likes: [],
       },
     ]);
   });
 
   it("should return null if user was not found", async () => {
-    loadPostByUserIdRepository.loadByUserId.mockResolvedValue(null);
+    loadPostByUserIdRepository.loadByUserId.mockResolvedValue([]);
 
-    const response = await sut.loadByUserId("any_user_id");
+    const response = await sut.loadByUserId(1);
 
-    expect(response).toBeNull();
+    expect(response.length).toBe(0);
   });
 });

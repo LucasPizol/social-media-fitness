@@ -18,27 +18,37 @@ describe("Update Exercise By Id Use Case", () => {
 
   it("should be able to update exercise by id", async () => {
     updateExerciseByIdRepository.updateById.mockResolvedValue({
-      id: "any_id",
+      id: 0,
       name: "any_other_name",
       createdAt: fakeDate,
+      repeats: 0,
+      rest_time: 0,
+      rest_type: "any_rest_type",
+      series: 0,
+      weight: 0,
       updatedAt: fakeDate,
       disabledAt: null,
-      isActive: true,
-      userId: "any_user_id",
+      isDisabled: true,
+      userId: 0,
     });
 
-    const response = await sut.updateById("any_id", "any_user_id", {
+    const response = await sut.updateById(0, 0, {
       name: "any_other_name",
     });
 
     expect(response).toEqual({
-      id: "any_id",
+      id: 0,
       name: "any_other_name",
       createdAt: fakeDate,
       updatedAt: fakeDate,
       disabledAt: null,
-      isActive: true,
-      userId: "any_user_id",
+      isDisabled: true,
+      userId: 0,
+      repeats: 0,
+      rest_time: 0,
+      rest_type: "any_rest_type",
+      series: 0,
+      weight: 0,
     });
   });
 });

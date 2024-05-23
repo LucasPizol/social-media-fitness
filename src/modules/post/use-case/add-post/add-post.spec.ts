@@ -14,29 +14,29 @@ describe("Add Post Use Case", () => {
 
   it("should be able to add a post", async () => {
     addPostRepository.add.mockResolvedValue({
-      id: "any_id",
+      id: 0,
       content: "any_content",
-      userId: "any_user_id",
+      userId: 0,
       createdAt: fakeDate,
       updatedAt: fakeDate,
       disabledAt: null,
-      isActive: true,
+      isDisabled: true,
     });
 
     const response = await sut.add({
       content: "any_content",
-      userId: "any_user_id",
+      userId: 0,
     });
 
     expect(addPostRepository.add).toHaveBeenCalledTimes(1);
     expect(response).toEqual({
-      id: "any_id",
+      id: 0,
       content: "any_content",
-      userId: "any_user_id",
+      userId: 0,
       createdAt: fakeDate,
       updatedAt: fakeDate,
       disabledAt: null,
-      isActive: true,
+      isDisabled: true,
     });
   });
 });

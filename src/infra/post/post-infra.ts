@@ -1,12 +1,8 @@
-import {
-  AddPostModel,
-  PostModel,
-  PostModelWithLikes,
-} from "@/domain/model/post";
+import { AddPostModel } from "@/domain/model/post";
 import { AddPostRepository } from "@/domain/repository/post/add-post-repository";
 import { DisablePostByIdRepository } from "@/domain/repository/post/disable-post-by-id-repository";
 import { LoadPostByUserIdRepository } from "@/domain/repository/post/load-post-by-user-id-repository";
-import { knexHelper } from "../knex/knex";
+import { prismaHelper } from "../prisma/prisma-helper";
 
 export class PostInfra
   implements
@@ -14,70 +10,33 @@ export class PostInfra
     LoadPostByUserIdRepository,
     DisablePostByIdRepository
 {
-  async add(post: AddPostModel): Promise<PostModel> {
-    return (await knexHelper<PostModel>("post").insert(post).returning("*"))[0];
+  async add(data: AddPostModel) {
+    return await prismaHelper.post.create({ data });
   }
 
-  async disableById(id: string, userId: string): Promise<void> {
-    await knexHelper("post")
-      .where({ id, userId })
-      .update({ isActive: false, disabledAt: new Date() });
+  async disableById(id: number, userId: number) {
+    await prismaHelper.post.update({
+      where: { id, userId },
+      data: { isDisabled: true },
+    });
   }
 
-  async loadByUserId(userId: string): Promise<PostModelWithLikes[] | null> {
-    const posts: (PostModel & {
-      likedById: string;
-      userName: string;
-      userAvatar: string;
-    })[] = await knexHelper("post")
-      .select([
-        "post.*",
-        "user.name as userName",
-        "user.avatar as userAvatar",
-        "like_post.userId as likedById",
-      ])
-      .leftJoin("like_post", "post.id", "like_post.postId")
-      .innerJoin("user", "user.id", "like_post.userId")
-      .where("post.userId", userId);
-
-    return posts.reduce((accum, post) => {
-      const thisPost = {
-        ...post,
-        userAvatar: undefined,
-        userName: undefined,
-        likedById: undefined,
-      };
-
-      if (!post.likedById) {
-        accum.push({
-          ...thisPost,
-          likes: [],
-        });
-        return accum;
-      }
-
-      const findPost = accum.find((accumPost) => accumPost.id === post.id);
-
-      if (!findPost) {
-        accum.push({
-          ...thisPost,
-          likes: [
-            {
-              id: post.likedById,
-              name: post.userName,
-              avatar: post.userAvatar,
+  async loadByUserId(userId: number) {
+    return await prismaHelper.post.findMany({
+      where: { userId },
+      include: {
+        likes: {
+          select: {
+            likedBy: {
+              select: {
+                avatar: true,
+                id: true,
+                name: true,
+              },
             },
-          ],
-        });
-        return accum;
-      }
-
-      findPost.likes.push({
-        id: post.likedById,
-        name: post.userName,
-        avatar: post.userAvatar,
-      });
-      return accum;
-    }, [] as PostModelWithLikes[]);
+          },
+        },
+      },
+    });
   }
 }

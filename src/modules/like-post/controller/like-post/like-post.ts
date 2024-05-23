@@ -1,17 +1,17 @@
+import { BadRequestError } from "@/protocols/errors/bad-request";
 import {
+  AddLike,
   Controller,
   HttpRequest,
   HttpResponse,
-  LikePost,
-  badRequest,
   created,
   handleErr,
 } from "./like-post-protocols";
 
 export class LikePostController implements Controller {
-  private readonly likePostUseCase: LikePost;
+  private readonly likePostUseCase: AddLike;
 
-  constructor(likePostUseCase: LikePost) {
+  constructor(likePostUseCase: AddLike) {
     this.likePostUseCase = likePostUseCase;
   }
 
@@ -20,16 +20,17 @@ export class LikePostController implements Controller {
       const user = httpRequest.user;
       const params = httpRequest.params;
 
-      if (!user) return badRequest(new Error("user"));
-      if (!params?.id) return badRequest(new Error("Param ID not recieved"));
+      if (!user) throw new BadRequestError("user");
+      if (!params?.id) throw new BadRequestError("Param 'id' not recieved");
 
       const response = await this.likePostUseCase.like({
-        postId: params.id,
-        userId: user.id,
+        postId: Number(params.id),
+        likedById: user.id,
       });
 
       return created(response);
     } catch (error) {
+      console.log(error);
       return handleErr(error);
     }
   }
