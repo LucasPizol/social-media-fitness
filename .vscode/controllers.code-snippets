@@ -2,7 +2,8 @@
   "[social-media-fitness] Add Controller": {
     "prefix": "add-controller",
     "body": [
-      "import { badRequest, created, serverError } from '@/main/helpers/http';",
+      "import { created, serverError } from '@/main/helpers/http';",
+      "import { BadRequestError } from '@/protocols/errors/bad-request'",
       "import { Controller } from '@/main/protocols/controller';",
       "import { HttpRequest, HttpResponse } from '@/protocols/http';",
       "import { validateBodyFields } from '@/utils/validate-body-fields'",
@@ -19,7 +20,7 @@
       "    try {",
       "      const user = httpRequest.user;",
       "",
-      "      if (!user) return badRequest(new Error('user'));",
+      "      if (!user) throw new BadRequestError('user');",
       "",
       "      const data = validateBodyFields<>([], httpRequest.body)",
       "",
@@ -36,7 +37,8 @@
   "[social-media-fitness] Load Controller": {
     "prefix": "load-controller",
     "body": [
-      "import { badRequest, ok, serverError } from '@/main/helpers/http';",
+      "import { ok, serverError } from '@/main/helpers/http';",
+      "import { BadRequestError } from '@/protocols/errors/bad-request'",
       "import { Controller } from '@/main/protocols/controller';",
       "import { HttpRequest, HttpResponse } from '@/protocols/http';",
       "",
@@ -67,7 +69,8 @@
   "[social-media-fitness] Update Controller": {
     "prefix": "update-controller",
     "body": [
-      "import { badRequest, ok, serverError } from '@/main/helpers/http';",
+      "import { ok, serverError } from '@/main/helpers/http';",
+      "import { BadRequestError } from '@/protocols/errors/bad-request'",
       "import { Controller } from '@/main/protocols/controller';",
       "import { HttpRequest, HttpResponse } from '@/protocols/http';",
       "",
@@ -85,9 +88,9 @@
       "      const data = httpRequest.body;",
       "      const params = httpRequest.params;",
       "",
-      "      if (!user) return badRequest(new Error('User not found'));",
-      "      if (!params.id) return badRequest(new Error('Params ID not found'))",
-      "      if (data.id !== undefined) return badRequest(new Error('You're trying to update the ID'));",
+      "      if (!user) throw new BadRequestError('User not found');",
+      "      if (!params.id) throw new BadRequestError('Params ID not found')",
+      "      if (data.id !== undefined) throw new BadRequestError('You're trying to update the ID');",
       "",
       "      const response = await this.update${1:}UseCase.updateById(params.id, user.id, data);",
       "",
@@ -102,7 +105,8 @@
   "[social-media-fitness] Disable Controller": {
     "prefix": "disable-controller",
     "body": [
-      "import { badRequest, created, serverError } from '@/main/helpers/http';",
+      "import { created, serverError } from '@/main/helpers/http';",
+      "import { BadRequestError } from '@/protocols/errors/bad-request'",
       "import { Controller } from '@/main/protocols/controller';",
       "import { HttpRequest, HttpResponse } from '@/protocols/http';",
       "import { validateBodyFields } from '@/utils/validate-body-fields'",
@@ -120,8 +124,8 @@
       "      const user = httpRequest.user;",
       "      const params = httpRequest.params;",
       "",
-      "      if (!user) return badRequest(new Error('user'));",
-      "      if (!params?.id) return badRequest(new Error('Param ID not recieved'));",
+      "      if (!user) throw new BadRequestError('user');",
+      "      if (!params?.id) throw new BadRequestError('Param ID not recieved');",
       "",
       "      const data = validateBodyFields<>([{key: 'isDisabled', type: 'boolean', required: true}], httpRequest.body)",
       "",

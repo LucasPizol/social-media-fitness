@@ -13,7 +13,7 @@ export class LoadUserByIdController implements Controller {
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      const data = validateBodyFields<{ id: number }>(
+      const data = validateBodyFields<{ id: string }>(
         [
           {
             key: "id",
@@ -24,7 +24,7 @@ export class LoadUserByIdController implements Controller {
         httpRequest.params
       );
 
-      const response = await this.loadUserByIdUseCase.loadById(data.id);
+      const response = await this.loadUserByIdUseCase.loadById(Number(data.id));
 
       return ok(response);
     } catch (error) {
