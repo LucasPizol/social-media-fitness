@@ -1,3 +1,4 @@
+import { BadRequestError } from "@/protocols/errors/bad-request";
 import { validateBodyFields } from "@/utils/validate-body-fields";
 import { ExerciseModel } from "../../use-case/add-exercise/add-exercise-protocols";
 import {
@@ -5,7 +6,6 @@ import {
   Controller,
   HttpRequest,
   HttpResponse,
-  badRequest,
   created,
   handleErr,
 } from "./add-exercise-protocols";
@@ -21,7 +21,7 @@ export class AddExerciseController implements Controller {
     try {
       const user = httpRequest.user;
 
-      if (!user) return badRequest(new Error("user"));
+      if (!user) throw new BadRequestError("user");
 
       const data = validateBodyFields<ExerciseModel>(
         [

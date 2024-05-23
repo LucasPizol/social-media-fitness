@@ -1,9 +1,9 @@
+import { BadRequestError } from "@/protocols/errors/bad-request";
 import {
   Controller,
   HttpRequest,
   HttpResponse,
   UpdateExerciseById,
-  badRequest,
   handleErr,
   ok,
 } from "./update-exercise-by-id-protocols";
@@ -21,10 +21,10 @@ export class UpdateExerciseByIdController implements Controller {
       const data = httpRequest.body;
       const params = httpRequest.params;
 
-      if (!user) return badRequest(new Error("User not found"));
-      if (!params.id) return badRequest(new Error("Params ID not found"));
+      if (!user) throw new BadRequestError("User not found");
+      if (!params.id) throw new BadRequestError("Params ID not found");
       if (data.id !== undefined)
-        return badRequest(new Error("You're trying to update the ID"));
+        throw new BadRequestError("You're trying to update the ID");
 
       const response = await this.updateExerciseByIdUseCase.updateById(
         params.id,

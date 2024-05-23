@@ -1,6 +1,7 @@
 import { DisablePostById } from "@/domain/use-case/post/disable-post-by-id-repository";
-import { badRequest, created, handleErr } from "@/main/helpers/http";
+import { created, handleErr } from "@/main/helpers/http";
 import { Controller } from "@/protocols/controller";
+import { BadRequestError } from "@/protocols/errors/bad-request";
 import { HttpRequest, HttpResponse } from "@/protocols/http";
 import { validateBodyFields } from "../add-post/add-post-protocols";
 
@@ -15,7 +16,7 @@ export class DisablePostByIdController implements Controller {
     try {
       const user = httpRequest.user;
 
-      if (!user) return badRequest(new Error("user"));
+      if (!user) throw new BadRequestError("user");
 
       const data = validateBodyFields<{ id: number }>(
         [

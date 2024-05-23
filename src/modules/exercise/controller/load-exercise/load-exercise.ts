@@ -1,9 +1,9 @@
+import { BadRequestError } from "@/protocols/errors/bad-request";
 import {
   Controller,
   HttpRequest,
   HttpResponse,
   LoadExercise,
-  badRequest,
   handleErr,
   ok,
 } from "./load-exercise-protocols";
@@ -19,7 +19,7 @@ export class LoadExerciseController implements Controller {
     try {
       const user = httpRequest.user;
 
-      if (!user) return badRequest(new Error("User not found"));
+      if (!user) throw new BadRequestError("User not found");
 
       const response = await this.loadExerciseUseCase.load(user.id);
       return ok(response);

@@ -1,10 +1,10 @@
+import { BadRequestError } from "@/protocols/errors/bad-request";
 import {
   AddPost,
   AddPostModel,
   Controller,
   HttpRequest,
   HttpResponse,
-  badRequest,
   created,
   handleErr,
   validateBodyFields,
@@ -21,7 +21,7 @@ export class AddPostController implements Controller {
     try {
       const user = httpRequest.user;
 
-      if (!user) return badRequest(new Error("user"));
+      if (!user) throw new BadRequestError("user");
 
       const data = validateBodyFields<AddPostModel>(
         [
