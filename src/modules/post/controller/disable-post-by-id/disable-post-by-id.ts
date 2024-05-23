@@ -1,7 +1,7 @@
 import { DisablePostById } from "@/domain/use-case/post/disable-post-by-id-repository";
-import { badRequest, created, serverError } from "@/main/helpers/http";
-import { Controller } from "@/main/protocols/controller";
-import { HttpRequest, HttpResponse } from "@/main/protocols/http";
+import { badRequest, created, handleErr } from "@/main/helpers/http";
+import { Controller } from "@/protocols/controller";
+import { HttpRequest, HttpResponse } from "@/protocols/http";
 import { validateBodyFields } from "../add-post/add-post-protocols";
 
 export class DisablePostByIdController implements Controller {
@@ -35,7 +35,7 @@ export class DisablePostByIdController implements Controller {
 
       return created(response);
     } catch (error) {
-      return serverError(error);
+      return handleErr(error);
     }
   }
 }

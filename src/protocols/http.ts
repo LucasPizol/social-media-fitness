@@ -11,4 +11,5 @@ export interface HttpRequest {
 export interface HttpResponse {
   statusCode: number;
   body?: any;
+  type?: string;
 }

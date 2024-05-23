@@ -2,8 +2,8 @@ import { adaptRoute } from "@/main/adapters/server-routes-adapter";
 import { loadUserByIdFactory } from "@/main/factories/user/load-user-by-id";
 import { loginUserFactory } from "@/main/factories/user/login-user";
 import { registerUserFactory } from "@/main/factories/user/register-user";
-import { HttpRequest } from "@/main/protocols/http";
 import { ensureAuthMiddleware } from "@/middleware/auth-middleware";
+import { HttpRequest } from "@/protocols/http";
 import { Router } from "express";
 
 const userRoutes = Router();

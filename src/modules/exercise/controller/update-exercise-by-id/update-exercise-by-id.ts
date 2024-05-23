@@ -4,8 +4,8 @@ import {
   HttpResponse,
   UpdateExerciseById,
   badRequest,
+  handleErr,
   ok,
-  serverError,
 } from "./update-exercise-by-id-protocols";
 
 export class UpdateExerciseByIdController implements Controller {
@@ -33,7 +33,7 @@ export class UpdateExerciseByIdController implements Controller {
       );
       return ok(response);
     } catch (error) {
-      return serverError(error);
+      return handleErr(error);
     }
   }
 }

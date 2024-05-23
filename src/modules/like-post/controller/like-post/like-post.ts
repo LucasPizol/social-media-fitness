@@ -5,7 +5,7 @@ import {
   LikePost,
   badRequest,
   created,
-  serverError,
+  handleErr,
 } from "./like-post-protocols";
 
 export class LikePostController implements Controller {
@@ -30,7 +30,7 @@ export class LikePostController implements Controller {
 
       return created(response);
     } catch (error) {
-      return serverError(error);
+      return handleErr(error);
     }
   }
 }

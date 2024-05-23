@@ -1,7 +1,7 @@
 import { LoginUser } from "@/domain/use-case/user/login-user";
-import { created, serverError } from "@/main/helpers/http";
-import { Controller } from "@/main/protocols/controller";
-import { HttpRequest, HttpResponse } from "@/main/protocols/http";
+import { created, handleErr } from "@/main/helpers/http";
+import { Controller } from "@/protocols/controller";
+import { HttpRequest, HttpResponse } from "@/protocols/http";
 import { validateBodyFields } from "@/utils/validate-body-fields";
 import { LoginUserModel } from "../../use-case/add-user/add-user-protocols";
 
@@ -37,7 +37,7 @@ export class LoginUserController implements Controller {
 
       return created(response);
     } catch (error) {
-      return serverError(error);
+      return handleErr(error);
     }
   }
 }

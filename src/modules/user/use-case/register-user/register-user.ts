@@ -1,3 +1,4 @@
+import { ConflictError } from "@/protocols/errors/conflict";
 import {
   AddUser,
   AddUserModel,
@@ -33,9 +34,7 @@ export class RegisterUserUseCase implements RegisterUser {
       user.email
     );
 
-    if (userExists) {
-      throw new Error("User already exists");
-    }
+    if (userExists) throw new ConflictError("User already exists");
 
     const hashedPassword = await this.bcryptHelper.hash(user.password);
 

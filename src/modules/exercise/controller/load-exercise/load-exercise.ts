@@ -4,8 +4,8 @@ import {
   HttpResponse,
   LoadExercise,
   badRequest,
+  handleErr,
   ok,
-  serverError,
 } from "./load-exercise-protocols";
 
 export class LoadExerciseController implements Controller {
@@ -24,7 +24,7 @@ export class LoadExerciseController implements Controller {
       const response = await this.loadExerciseUseCase.load(user.id);
       return ok(response);
     } catch (error) {
-      return serverError(error);
+      return handleErr(error);
     }
   }
 }

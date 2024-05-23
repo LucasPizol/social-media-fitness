@@ -1,3 +1,4 @@
+import { NotAuthorizedError } from "@/protocols/errors/authorization";
 import {
   AddUser,
   BcryptCompareProtocols,
@@ -27,14 +28,14 @@ export class LoginUserUseCase implements LoginUser {
   async login(email: string, password: string) {
     const user = await this.loadUserByEmailUseCase.loadByEmail(email);
 
-    if (!user) throw new Error("Invalid Credentials");
+    if (!user) throw new NotAuthorizedError("Invalid Credentials");
 
     const isValidPassword = await this.bcryptHelper.compare(
       password,
       user.password
     );
 
-    if (!isValidPassword) throw new Error("Invalid Credentials");
+    if (!isValidPassword) throw new NotAuthorizedError("Invalid Credentials");
 
     const token = this.jwtHelper.sign({
       id: user.id,

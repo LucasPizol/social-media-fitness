@@ -6,7 +6,7 @@ import {
   HttpResponse,
   badRequest,
   created,
-  serverError,
+  handleErr,
   validateBodyFields,
 } from "./add-post-protocols";
 
@@ -41,7 +41,7 @@ export class AddPostController implements Controller {
 
       return created(response);
     } catch (error) {
-      return serverError(error);
+      return handleErr(error);
     }
   }
 }

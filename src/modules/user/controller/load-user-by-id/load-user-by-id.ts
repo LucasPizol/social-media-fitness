@@ -1,7 +1,7 @@
 import { LoadUserById } from "@/domain/use-case/user/load-user-by-id";
-import { ok, serverError } from "@/main/helpers/http";
-import { Controller } from "@/main/protocols/controller";
-import { HttpRequest, HttpResponse } from "@/main/protocols/http";
+import { handleErr, ok } from "@/main/helpers/http";
+import { Controller } from "@/protocols/controller";
+import { HttpRequest, HttpResponse } from "@/protocols/http";
 import { validateBodyFields } from "@/utils/validate-body-fields";
 
 export class LoadUserByIdController implements Controller {
@@ -28,7 +28,7 @@ export class LoadUserByIdController implements Controller {
 
       return ok(response);
     } catch (error) {
-      return serverError(error);
+      return handleErr(error);
     }
   }
 }

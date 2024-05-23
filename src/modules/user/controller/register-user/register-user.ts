@@ -4,7 +4,7 @@ import {
   HttpResponse,
   RegisterUser,
   created,
-  serverError,
+  handleErr,
 } from "./register-user-protocols";
 
 export class RegisterUserController implements Controller {
@@ -20,7 +20,7 @@ export class RegisterUserController implements Controller {
 
       return created(user);
     } catch (error) {
-      return serverError(error);
+      return handleErr(error);
     }
   }
 }

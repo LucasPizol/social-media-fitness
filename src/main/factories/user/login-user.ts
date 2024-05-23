@@ -1,9 +1,9 @@
 import { UserInfra } from "@/infra/user/user-infra";
-import { Controller } from "@/main/protocols/controller";
 import { LoginUserController } from "@/modules/user/controller/login-user/login-user";
 import { AddUserUseCase } from "@/modules/user/use-case/add-user/add-user";
 import { LoadUserByEmailUseCase } from "@/modules/user/use-case/load-user-by-email/load-user-by-email";
 import { LoginUserUseCase } from "@/modules/user/use-case/login-user/login-user";
+import { Controller } from "@/protocols/controller";
 import { BcryptHelper } from "@/services/implementations/bcrypt/bcrypt-helper";
 import { JWTHelper } from "@/services/implementations/jwt/jwt-helper";
 

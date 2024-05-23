@@ -7,7 +7,7 @@ import {
   HttpResponse,
   badRequest,
   created,
-  serverError,
+  handleErr,
 } from "./add-exercise-protocols";
 
 export class AddExerciseController implements Controller {
@@ -40,7 +40,7 @@ export class AddExerciseController implements Controller {
       });
       return created(response);
     } catch (error) {
-      return serverError(error);
+      return handleErr(error);
     }
   }
 }

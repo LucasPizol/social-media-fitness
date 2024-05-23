@@ -1,6 +1,6 @@
+import { Controller } from "@/protocols/controller";
+import { HttpRequest } from "@/protocols/http";
 import { Response } from "express";
-import { Controller } from "../protocols/controller";
-import { HttpRequest } from "../protocols/http";
 
 export const adaptRoute = (controller: Controller) => {
   return async (req: HttpRequest, res: Response) => {
@@ -16,13 +16,14 @@ export const adaptRoute = (controller: Controller) => {
 
     res.status(httpResponse.statusCode);
 
-    if (httpResponse.statusCode === 500) {
-      res.send({ error: "ERROR: " + httpResponse.body.message });
-    } else if (
-      httpResponse.statusCode >= 400 &&
-      httpResponse.statusCode < 500
+    if (
+      httpResponse.statusCode === 500 ||
+      (httpResponse.statusCode >= 400 && httpResponse.statusCode < 500)
     ) {
-      res.send({ error: httpResponse.body.message });
+      res.send({
+        error: httpResponse.body,
+        type: httpResponse.type,
+      });
     } else {
       res.send(httpResponse.body);
     }

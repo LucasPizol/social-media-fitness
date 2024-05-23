@@ -1,7 +1,7 @@
 import { DisableExerciseById } from "@/domain/use-case/exercise/disable-exercise-by-id";
-import { badRequest, created, serverError } from "@/main/helpers/http";
-import { Controller } from "@/main/protocols/controller";
-import { HttpRequest, HttpResponse } from "@/main/protocols/http";
+import { badRequest, created, handleErr } from "@/main/helpers/http";
+import { Controller } from "@/protocols/controller";
+import { HttpRequest, HttpResponse } from "@/protocols/http";
 import { validateBodyFields } from "@/utils/validate-body-fields";
 
 export class DisableExerciseByIdController implements Controller {
@@ -30,7 +30,7 @@ export class DisableExerciseByIdController implements Controller {
       );
       return created(response);
     } catch (error) {
-      return serverError(error);
+      return handleErr(error);
     }
   }
 }

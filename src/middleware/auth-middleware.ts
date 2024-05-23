@@ -1,5 +1,5 @@
 import { UserModel } from "@/domain/model/user";
-import { HttpRequest } from "@/main/protocols/http";
+import { HttpRequest } from "@/protocols/http";
 import { JWTHelper } from "@/services/implementations/jwt/jwt-helper";
 import { NextFunction, Response } from "express";
 

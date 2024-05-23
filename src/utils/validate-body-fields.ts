@@ -1,3 +1,5 @@
+import { BadRequestError } from "@/protocols/errors/bad-request";
+
 interface BodyFields<T> {
   key: keyof T;
   required: boolean;
@@ -23,7 +25,7 @@ export const validateBodyFields = <T>(fields: BodyFields<T>[], data: T) => {
   }
 
   if (missingParams.length > 0 || invalidParams.length > 0) {
-    throw new Error(
+    throw new BadRequestError(
       `[Invalid Params: ${invalidParams.join(
         ", "
       )}], [Missing Params: ${missingParams.join(", ")}]`

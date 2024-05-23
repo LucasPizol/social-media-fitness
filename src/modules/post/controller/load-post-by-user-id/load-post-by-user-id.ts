@@ -3,8 +3,8 @@ import {
   HttpRequest,
   HttpResponse,
   LoadPostByUserId,
+  handleErr,
   ok,
-  serverError,
   validateBodyFields,
 } from "./load-post-by-user-id-protocols";
 
@@ -32,7 +32,7 @@ export class LoadPostByUserIdController implements Controller {
 
       return ok(response);
     } catch (error) {
-      return serverError(error);
+      return handleErr(error);
     }
   }
 }
