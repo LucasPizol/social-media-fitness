@@ -28,6 +28,7 @@ model User {
   comments  Comment[]
   exercises Exercise[]
   post      Post[]
+  postMedia PostMedia[]
 }
 
 model Exercise {
@@ -53,8 +54,7 @@ model Exercise {
 model Post {
   id Int @id @default(autoincrement())
 
-  content  String
-  mediaUrl String?
+  content String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -65,8 +65,23 @@ model Post {
   isDisabled Boolean   @default(false)
   disabledAt DateTime?
 
-  likes    Like[]
-  comments Comment[]
+  likes     Like[]
+  comments  Comment[]
+  postMedia PostMedia[]
+}
+
+model PostMedia {
+  id  Int    @id @default(autoincrement())
+  url String
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+
+  postId Int
+  post   Post @relation(fields: [postId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Like {

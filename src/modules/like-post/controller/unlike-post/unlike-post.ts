@@ -24,7 +24,7 @@ export class UnlikePostController implements Controller {
       if (!params?.id) throw new BadRequestError("Param 'id' not recieved");
 
       const response = await this.unlikePostUseCase.unlike({
-        postId: params.id,
+        postId: Number(params.id),
         likedById: user.id,
       });
 

@@ -1,10 +1,10 @@
 import { UserModel } from "@/domain/model/user";
-import { HttpRequest } from "@/protocols/http";
+import { ServerRoutesProtocolAdapter } from "@/main/adapters/server-routes-adapter-protocol";
 import { JWTHelper } from "@/services/implementations/jwt/jwt-helper";
 import { NextFunction, Response } from "express";
 
 export const ensureAuthMiddleware = async (
-  req: HttpRequest,
+  req: ServerRoutesProtocolAdapter,
   res: Response,
   next: NextFunction
 ) => {

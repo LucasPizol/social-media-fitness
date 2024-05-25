@@ -1,3 +1,4 @@
+import { AddPostMediaUseCase } from "@/modules/post-media/use-case/add-post-media/add-post-media";
 import { MockProxy, mock } from "jest-mock-extended";
 import { AddPostUseCase } from "./add-post";
 import { AddPost, AddPostRepository } from "./add-post-protocols";
@@ -5,10 +6,11 @@ import { AddPost, AddPostRepository } from "./add-post-protocols";
 describe("Add Post Use Case", () => {
   let sut: AddPost;
   let addPostRepository: MockProxy<AddPostRepository>;
+  let addPostMediaUseCase: MockProxy<AddPostMediaUseCase>;
 
   beforeEach(() => {
     addPostRepository = mock();
-    sut = new AddPostUseCase(addPostRepository);
+    sut = new AddPostUseCase(addPostRepository, addPostMediaUseCase);
   });
   const fakeDate = new Date();
 
@@ -20,7 +22,6 @@ describe("Add Post Use Case", () => {
       createdAt: fakeDate,
       updatedAt: fakeDate,
       disabledAt: null,
-      mediaUrl: null,
       isDisabled: true,
     });
 

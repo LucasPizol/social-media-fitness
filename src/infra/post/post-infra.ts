@@ -44,6 +44,11 @@ export class PostInfra
               name: true,
             },
           },
+          postMedia: {
+            select: {
+              url: true,
+            },
+          },
         },
       });
     }
@@ -52,6 +57,8 @@ export class PostInfra
       orderBy: {
         createdAt: "desc",
       },
+      skip: 10,
+      take: 10,
       include: {
         likes: {
           select: {
@@ -69,6 +76,11 @@ export class PostInfra
             avatar: true,
             id: true,
             name: true,
+          },
+        },
+        postMedia: {
+          select: {
+            url: true,
           },
         },
       },

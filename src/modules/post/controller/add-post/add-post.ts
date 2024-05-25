@@ -21,6 +21,8 @@ export class AddPostController implements Controller {
     try {
       const user = httpRequest.user;
 
+      const files = httpRequest.files;
+
       if (!user) throw new BadRequestError("user");
 
       const data = validateBodyFields<AddPostModel>(
@@ -34,10 +36,13 @@ export class AddPostController implements Controller {
         httpRequest.body
       );
 
-      const response = await this.addPostUseCase.add({
-        ...data,
-        userId: user.id,
-      });
+      const response = await this.addPostUseCase.add(
+        {
+          ...data,
+          userId: user.id,
+        },
+        files
+      );
 
       return created(response);
     } catch (error) {

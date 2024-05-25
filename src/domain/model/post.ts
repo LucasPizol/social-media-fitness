@@ -8,7 +8,6 @@ export interface PostModel {
   updatedAt: Date;
   disabledAt: Date | null;
   isDisabled: boolean;
-  mediaUrl: string | null;
 }
 
 export interface AddPostModel {
