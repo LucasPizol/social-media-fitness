@@ -18,7 +18,7 @@ export class PostInfra
     });
   }
 
-  async load(userId?: number) {
+  async load(postCount: number, userId?: number) {
     if (userId) {
       return await prismaHelper.post.findMany({
         where: { userId },
@@ -57,8 +57,8 @@ export class PostInfra
       orderBy: {
         createdAt: "desc",
       },
-      skip: 10,
-      take: 10,
+      skip: postCount,
+      take: postCount + 10,
       include: {
         likes: {
           select: {

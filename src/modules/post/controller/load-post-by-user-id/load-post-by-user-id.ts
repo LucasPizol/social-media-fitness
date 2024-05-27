@@ -1,4 +1,5 @@
 import { LoadPost } from "@/domain/use-case/post/load-post";
+import { BadRequestError } from "@/protocols/errors/bad-request";
 import {
   Controller,
   HttpRequest,
@@ -16,10 +17,13 @@ export class LoadPostController implements Controller {
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      const id = httpRequest.query;
+      const query = httpRequest.query;
+
+      if (!query.postCount) throw new BadRequestError("postCount is required");
 
       const response = await this.loadPostByUserIdUseCase.load(
-        id ? Number(id) : undefined
+        Number(query.postCount),
+        query.id ? Number(query.id) : undefined
       );
 
       return ok(response);

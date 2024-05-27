@@ -8,7 +8,7 @@ export class LoadPostUseCase implements LoadPost {
     this.loadPostByUserIdRepository = loadPostByUserIdRepository;
   }
 
-  async load(userId?: number) {
-    return await this.loadPostByUserIdRepository.load(userId);
+  async load(postCount: number, userId?: number) {
+    return await this.loadPostByUserIdRepository.load(postCount, userId);
   }
 }
