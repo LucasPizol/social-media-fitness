@@ -2,9 +2,9 @@
   "[social-media-fitness] Add Controller": {
     "prefix": "add-controller",
     "body": [
-      "import { created, serverError } from '@/main/helpers/http';",
+      "import { created, handleErr } from '@/main/helpers/http';",
       "import { BadRequestError } from '@/protocols/errors/bad-request'",
-      "import { Controller } from '@/main/protocols/controller';",
+      "import { Controller } from '@/protocols/controller';",
       "import { HttpRequest, HttpResponse } from '@/protocols/http';",
       "import { validateBodyFields } from '@/utils/validate-body-fields'",
       "",
@@ -37,9 +37,9 @@
   "[social-media-fitness] Load Controller": {
     "prefix": "load-controller",
     "body": [
-      "import { ok, serverError } from '@/main/helpers/http';",
+      "import { ok, handleErr } from '@/main/helpers/http';",
       "import { BadRequestError } from '@/protocols/errors/bad-request'",
-      "import { Controller } from '@/main/protocols/controller';",
+      "import { Controller } from '@/protocols/controller';",
       "import { HttpRequest, HttpResponse } from '@/protocols/http';",
       "",
       "export class Load${1:}Controller implements Controller {",
@@ -54,7 +54,7 @@
       "    try {",
       "      const user = httpRequest.user;",
       "",
-      "      if (!user) return badRequest(new Error('User not found'));",
+      "      if (!user) throw new BadRequestError('User not found');",
       "",
       "      const response = await this.load${1:}UseCase.load(user.id);",
       "",
@@ -69,9 +69,9 @@
   "[social-media-fitness] Update Controller": {
     "prefix": "update-controller",
     "body": [
-      "import { ok, serverError } from '@/main/helpers/http';",
+      "import { ok, handleErr } from '@/main/helpers/http';",
       "import { BadRequestError } from '@/protocols/errors/bad-request'",
-      "import { Controller } from '@/main/protocols/controller';",
+      "import { Controller } from '@/protocols/controller';",
       "import { HttpRequest, HttpResponse } from '@/protocols/http';",
       "",
       "export class Update${1:}Controller implements Controller {",
@@ -105,9 +105,9 @@
   "[social-media-fitness] Disable Controller": {
     "prefix": "disable-controller",
     "body": [
-      "import { created, serverError } from '@/main/helpers/http';",
+      "import { created, handleErr } from '@/main/helpers/http';",
       "import { BadRequestError } from '@/protocols/errors/bad-request'",
-      "import { Controller } from '@/main/protocols/controller';",
+      "import { Controller } from '@/protocols/controller';",
       "import { HttpRequest, HttpResponse } from '@/protocols/http';",
       "import { validateBodyFields } from '@/utils/validate-body-fields'",
       "",
