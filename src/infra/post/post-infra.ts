@@ -18,57 +18,24 @@ export class PostInfra
     });
   }
 
-  async load(postCount: number, userId?: number) {
-    if (userId) {
-      return await prismaHelper.post.findMany({
-        where: { userId },
-        orderBy: {
-          createdAt: "desc",
-        },
-        include: {
-          likes: {
-            select: {
-              likedBy: {
-                select: {
-                  avatar: true,
-                  id: true,
-                  name: true,
-                },
-              },
-            },
-          },
-          user: {
-            select: {
-              avatar: true,
-              id: true,
-              name: true,
-            },
-          },
-          postMedia: {
-            select: {
-              url: true,
-            },
-          },
-        },
-      });
-    }
-
+  async load(postCount: number, userSessionId?: number, userId?: number) {
     return await prismaHelper.post.findMany({
-      orderBy: {
-        createdAt: "desc",
-      },
+      where: { userId },
+      orderBy: { createdAt: "desc" },
       skip: postCount,
       take: postCount + 10,
       include: {
         likes: {
+          where: { likedById: userSessionId },
+          take: 1,
           select: {
-            likedBy: {
-              select: {
-                avatar: true,
-                id: true,
-                name: true,
-              },
-            },
+            likedBy: { select: { id: true } },
+          },
+        },
+        _count: {
+          select: {
+            comments: true,
+            likes: true,
           },
         },
         user: {

@@ -18,11 +18,13 @@ export class LoadPostController implements Controller {
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const query = httpRequest.query;
+      const user = httpRequest.user;
 
       if (!query.postCount) throw new BadRequestError("postCount is required");
 
       const response = await this.loadPostByUserIdUseCase.load(
         Number(query.postCount),
+        httpRequest.user?.id,
         query.id ? Number(query.id) : undefined
       );
 
